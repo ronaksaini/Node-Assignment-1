@@ -1,11 +1,8 @@
-// Function to fetch and display all data
 function fetchDataAndDisplay() {
     fetch('/data')
     .then(response => response.json())
     .then(data => {
-        // Clear existing content
         document.getElementById('data').innerHTML = '';
-        // Append each data entry to the page
         data.forEach(entry => {
             const entryElement = document.createElement('div');
             entryElement.innerHTML = `<b>First Name:</b> ${entry.firstName}<br><b>Last Name:</b>  ${entry.lastName}<br><b>Contact:</b>  ${entry.mobileNo}<br><b>E-mail: </b> ${entry.email}<br><b>Address: </b> ${entry.street},${entry.city},${entry.state},${entry.country}<br><b>Login ID:</b>  ${entry.loginId}<br><b>Password: </b> ${entry.password}`;
@@ -17,7 +14,6 @@ function fetchDataAndDisplay() {
     });
 }
 
-// Add event listener only when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('myForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -33,11 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(jsonData),
         })
-        .then(response => response.json()) // Parse response as JSON
+        .then(response => response.json()) 
         .then(data => {
-            // Display the inserted data on the page
-            // document.getElementById('response').innerText = `Data inserted successfully:\nName: ${data.name}, Email: ${data.email}`;
-            // Fetch and display all data again after submission
             fetchDataAndDisplay();
         })
         .catch(error => {
